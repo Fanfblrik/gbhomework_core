@@ -7,7 +7,11 @@ public class Team {
     private int vSwim;
     private int vCrawl;
 
-    
+    Team(int vRun,int vSwim,int vCrawl){
+        this.vRun = vRun;
+        this.vSwim = vSwim;
+        this.vCrawl = vCrawl;
+    }
 
 
 }
