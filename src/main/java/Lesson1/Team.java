@@ -36,7 +36,7 @@ public class Team {
     course.doIt(Galileo, Ivent);
 
     }
-
+// Так оно покрасивее будет
     public static void teamInfo(Team[] Galileo){
         for (int i = 0; i < Galileo.length; i++){
             System.out.println(i + 1 + ") Участник " + Galileo[i].getMemberName() + ", выносливость - " + Galileo[i].getStamina());

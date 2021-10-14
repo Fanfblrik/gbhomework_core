@@ -18,7 +18,7 @@ public class Course {
         this.length = length;
         this.type = type;
     }
-
+// Объединил два метода в один
     public static void doIt(Team[] Galileo, Course[] Ivent){
 
         for (int i = 0; i < Ivent.length; i++){
