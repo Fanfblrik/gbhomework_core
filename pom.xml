@@ -13,4 +13,25 @@
         <maven.compiler.target>15</maven.compiler.target>
     </properties>
 
+    <dependencies>
+
+        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.progsbase.libraries</groupId>
+            <artifactId>JSON</artifactId>
+            <version>0.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.tsohr</groupId>
+            <artifactId>json</artifactId>
+            <version>0.0.2</version>
+        </dependency>
+
+    </dependencies>
+
 </project>
