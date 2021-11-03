@@ -6,13 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="GeekBrainsHomeWorks — Core" />
+        <module name="GeekBrainsHomeWorks_Core" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="GeekBrainsHomeWorks — Core" options="--add-exports java.base/sun.net.www.protocol.http=ALL-UNNAMED" />
+      <module name="GeekBrainsHomeWorks_Core" options="--add-exports java.base/sun.net.www.protocol.http=ALL-UNNAMED" />
     </option>
   </component>
 </project>
