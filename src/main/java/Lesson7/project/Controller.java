@@ -1,6 +1,7 @@
 package Lesson7.project;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ public class Controller {
         variants.put(2, Period.DB);
     }
 
-    public void getWeather(String userInput, String selectedCity) throws IOException {
+    public void getWeather(String userInput, String selectedCity) throws IOException, SQLException {
         Integer userIntegerInput = Integer.parseInt(userInput);
 
         switch (variants.get(userIntegerInput)) {

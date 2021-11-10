@@ -2,7 +2,6 @@ package Lesson7.project;
 
 import Lesson7.project.entity.Weather;
 
-import java.io.Reader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,13 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class DataBaseRepository {
     private String insertWeather = "insert into weather (city, localdate, temperature) values (?, ?, ?)";
     private String getWeather = "select * from weather";
-    private static final String DB_PATH = "jdbc:sqlite:geekbrains.db";
+    private static final String DB_PATH = "jdbc:sqlite:weather.db";
 
     static {
         try {
@@ -54,14 +52,6 @@ public class DataBaseRepository {
         }
     }
 
-    //public List<Weather> getSavedToDBWeather() {
-    //    try (Connection connection = DriverManager.getConnection(DB_PATH)) {
-    //        //TODO: реализовать этот метод получения данных из таблицы погоды
-    //    } catch (SQLException throwables) {
-    //        throwables.printStackTrace();
-    //    }
-    //}
-
     public List<Weather> getSavedToDBWeather() {
         List<Weather> weathers = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(DB_PATH)) {
@@ -69,13 +59,13 @@ public class DataBaseRepository {
             ResultSet resultSet = statement.executeQuery(getWeather);
             while (resultSet.next()) {
                 System.out.print(resultSet.getInt("id"));
-                System.out.println(" ");
+                System.out.println("|");
                 System.out.print(resultSet.getString("city"));
-                System.out.println(" ");
+                System.out.println("|");
                 System.out.print(resultSet.getString("localdate"));
-                System.out.println(" ");
+                System.out.println("|");
                 System.out.print(resultSet.getDouble("temperature"));
-                System.out.println(" ");
+                System.out.println("|");
                 weathers.add(new Weather(resultSet.getString("city"),
                         resultSet.getString("localdate"),
                         resultSet.getDouble("temperature")));
@@ -84,10 +74,5 @@ public class DataBaseRepository {
             throwables.printStackTrace();
         }
         return weathers;
-    }
-
-    public static void main(String[] args) throws SQLException {
-        DataBaseRepository dataBaseRepository = new DataBaseRepository();
-        System.out.println(dataBaseRepository.getSavedToDBWeather());
     }
 }

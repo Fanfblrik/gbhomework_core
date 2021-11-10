@@ -10,9 +10,11 @@ import okhttp3.Response;
 import java.io.*;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -38,7 +40,7 @@ public class AccuweatherModel implements WeatherModel {
 
     private DataBaseRepository dataBaseRepository = new DataBaseRepository();
 
-    public void getWeather(String selectedCity, Period period) throws IOException {
+    public void getWeather(String selectedCity, Period period) throws IOException, SQLException {
         switch (period) {
             case NOW:
                 HttpUrl httpUrl = new HttpUrl.Builder()
@@ -78,8 +80,9 @@ public class AccuweatherModel implements WeatherModel {
 
                 temperature = (temperature - c) * d;
 
-                        System.out.println("Погода: " + localDate + " - " + (String.format("%.1f", temperature)) + "C");
-
+                System.out.println("Погода: " + localDate + " - " + (String.format("%.1f", temperature)) + "C");
+                Weather weather = new Weather(selectedCity, localDate, temperature);
+                dataBaseRepository.saveWeatherToDataBase(weather);
                 break;
             case FIVE_DAYS:
                 HttpUrl httpUrl5 = new HttpUrl.Builder()
@@ -105,6 +108,7 @@ public class AccuweatherModel implements WeatherModel {
                 catch (Exception e){
                     System.out.println("error" + e.toString());
                 }
+                List<Weather> myList = new ArrayList<>();
                 for (int i = 0; i < 5; i++){
                     String Date5 = objectMapper.readTree(weatherResponse5)
                             .at("/DailyForecasts")
@@ -125,10 +129,11 @@ public class AccuweatherModel implements WeatherModel {
                     LocalDateTime dateTime = LocalDateTime.ofEpochSecond(chislo, 0, ZoneOffset.UTC);
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE,MMMM d,yyyy h:mm,a", Locale.ENGLISH);
                     String formattedDate = dateTime.format(formatter);
+                    myList.add(weather = new Weather(selectedCity, Date5, temperature5));
                     System.out.println("Погода в " + selectedCity + " : " + formattedDate + " - " + weatherText + " - " + (String.format("%.1f", temperature5)) + "C");
-
                 }
-                  break;
+                dataBaseRepository.saveWeatherToDataBase(myList);
+                break;
         }
     }
 
