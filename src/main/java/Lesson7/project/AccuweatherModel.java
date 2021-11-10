@@ -119,7 +119,7 @@ public class AccuweatherModel implements WeatherModel {
                             .at("/DailyForecasts")
                             .get(i).at("/Day/IconPhrase")
                             .asText();
-
+ 
                     double temperature5 = objectMapper.readTree(weatherResponse5).at("/DailyForecasts")
                             .get(i)
                             .at("/Temperature/Maximum/Value")
